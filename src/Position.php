@@ -5,13 +5,23 @@ namespace Phpokoban;
 class Position
 {
     /** @var int */
-    public $row = 0;
+    private $row = 0;
     /** @var int */
-    public $col = 0;
+    private $col = 0;
 
     public function __construct(int $col, int $row)
     {
         $this->col = $col;
         $this->row = $row;
+    }
+
+    public function row(): int
+    {
+        return $this->row;
+    }
+
+    public function col(): int
+    {
+        return $this->col;
     }
 }

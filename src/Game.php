@@ -17,8 +17,10 @@ class Game
     private $height = 0;
     /** @var int */
     private $width = 0;
-    /** @var Position */
-    private $player;
+    /** @var int */
+    private $player_row = 0;
+    /** @var int */
+    private $player_col = 0;
 
     /**
      * @param string $grid []
@@ -32,7 +34,8 @@ class Game
             for ($i = 0; $i < strlen($line); ++$i) {
                 switch ($line[$i]) {
                     case self::PLAYER_POS:
-                        $this->player = new Position(count($row), $i);
+                        $this->player_row = count($this->game);
+                        $this->player_col = $i;
                         $block = self::BLOCK_EMPTY;
                         break;
                     case self::BLOCK_EMPTY:
@@ -63,34 +66,34 @@ class Game
 
     public function player(): Position
     {
-        return $this->player;
+        return new Position($this->player_col, $this->player_row);
     }
 
     public function moveUp()
     {
-        if ($this->player->row > 0) {
-            --$this->player->row;
+        if ($this->player_row > 0) {
+            --$this->player_row;
         }
     }
 
     public function moveDown()
     {
-        if ($this->player->row < $this->height - 1) {
-            ++$this->player->row;
+        if ($this->player_row < $this->height - 1) {
+            ++$this->player_row;
         }
     }
 
     public function moveLeft()
     {
-        if ($this->player->col > 0) {
-            --$this->player->col;
+        if ($this->player_col > 0) {
+            --$this->player_col;
         }
     }
 
     public function moveRight()
     {
-        if ($this->player->col < $this->width - 1) {
-            ++$this->player->col;
+        if ($this->player_col < $this->width - 1) {
+            ++$this->player_col;
         }
     }
 

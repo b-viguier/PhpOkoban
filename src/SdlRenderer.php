@@ -128,8 +128,8 @@ class SdlRenderer
             // Player
             if (isset($this->textureMap[Game::PLAYER_POS])) {
                 $rect = new \SDL_Rect(
-                    $colOffset + $game->player()->col * $blockSize,
-                    $rowOffset + $game->player()->row * $blockSize,
+                    $colOffset + $game->player()->col() * $blockSize,
+                    $rowOffset + $game->player()->row() * $blockSize,
                     $blockSize, $blockSize
                 );
                 \SDL_RenderCopy(
