@@ -71,28 +71,36 @@ class Game
 
     public function moveUp()
     {
-        if ($this->player_row > 0) {
+        $nextBlock = &$this->game[$this->player_row - 1][$this->player_col];
+        $nextNextBlock = &$this->game[$this->player_row - 2][$this->player_col];
+        if ($this->pushBox($nextBlock, $nextNextBlock)) {
             --$this->player_row;
         }
     }
 
     public function moveDown()
     {
-        if ($this->player_row < $this->height - 1) {
+        $nextBlock = &$this->game[$this->player_row + 1][$this->player_col];
+        $nextNextBlock = &$this->game[$this->player_row + 2][$this->player_col];
+        if ($this->pushBox($nextBlock, $nextNextBlock)) {
             ++$this->player_row;
         }
     }
 
     public function moveLeft()
     {
-        if ($this->player_col > 0) {
+        $nextBlock = &$this->game[$this->player_row][$this->player_col - 1];
+        $nextNextBlock = &$this->game[$this->player_row][$this->player_col - 2];
+        if ($this->pushBox($nextBlock, $nextNextBlock)) {
             --$this->player_col;
         }
     }
 
     public function moveRight()
     {
-        if ($this->player_col < $this->width - 1) {
+        $nextBlock = &$this->game[$this->player_row][$this->player_col + 1];
+        $nextNextBlock = &$this->game[$this->player_row][$this->player_col + 2];
+        if ($this->pushBox($nextBlock, $nextNextBlock)) {
             ++$this->player_col;
         }
     }
@@ -100,5 +108,30 @@ class Game
     public function blockAt(int $row, int $col): string
     {
         return $this->game[$row][$col] ?? self::BLOCK_EMPTY;
+    }
+
+    private function pushBox(string &$nextBlock, ?string &$nextNextBlock): bool
+    {
+        switch ($nextBlock) {
+            // No box to push
+            case self::BLOCK_EMPTY:
+            case self::BLOCK_GOAL:
+                return true;
+
+            // There is a box? Checking next block
+            case self::BLOCK_BOX:
+            case self::BLOCK_BOX_OK:
+                switch ($nextNextBlock) {
+                    // Box can be moved
+                    case self::BLOCK_EMPTY:
+                    case self::BLOCK_GOAL:
+                        $nextBlock = $nextBlock === self::BLOCK_BOX ? self::BLOCK_EMPTY : self::BLOCK_GOAL;
+                        $nextNextBlock = $nextNextBlock === self::BLOCK_EMPTY ? self::BLOCK_BOX : self::BLOCK_BOX_OK;
+
+                        return true;
+                }
+        }
+
+        return false;
     }
 }
