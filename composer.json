@@ -1,0 +1,21 @@
+{
+    "name": "bviguier/phpokoban",
+    "description": "Sokoban-like game",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Benoit Viguier",
+            "email": "benoit.viguier.pro+github@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Phpokoban\\": "src/"
+        }
+    },
+    "require": {
+        "php": "^7.2",
+        "ext-SDL": "^2.1"
+    }
+}
