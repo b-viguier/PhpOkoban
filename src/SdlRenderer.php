@@ -60,7 +60,7 @@ class SdlRenderer
     public function run(Game $game)
     {
         // Compute graphical data
-        $blockSize = min(
+        $blockSize = (int) min(
             $this->width / $game->width(),
             $this->height / $game->height()
         );
