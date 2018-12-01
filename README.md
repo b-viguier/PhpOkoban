@@ -24,7 +24,8 @@ composer install
 ./bin/phpokoban
 ```
 
-Or write your own level as a text file.
+Or write your own level as a text file,
+using [XSB file format](http://www.sokobano.de/wiki/index.php?title=Level_format).
 ```shell
 ./bin/phpokoban <file-name>
 ```

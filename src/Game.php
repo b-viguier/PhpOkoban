@@ -4,12 +4,13 @@ namespace Phpokoban;
 
 class Game
 {
-    public const BLOCK_WALL = 'W';
-    public const BLOCK_BOX = 'B';
-    public const BLOCK_GOAL = '*';
-    public const BLOCK_BOX_OK = 'G';
+    public const BLOCK_WALL = '#';
+    public const BLOCK_BOX = '$';
+    public const BLOCK_GOAL = '.';
+    public const BLOCK_BOX_ON_GOAL = '*';
     public const BLOCK_EMPTY = ' ';
-    public const PLAYER_POS = 'P';
+    public const PLAYER_POS = '@';
+    public const PLAYER_POS_ON_GOAL = '+';
 
     /** @var string[][] */
     private $game = [];
@@ -34,15 +35,16 @@ class Game
             for ($i = 0; $i < strlen($line); ++$i) {
                 switch ($line[$i]) {
                     case self::PLAYER_POS:
+                    case self::PLAYER_POS_ON_GOAL:
                         $this->player_row = count($this->game);
                         $this->player_col = $i;
-                        $block = self::BLOCK_EMPTY;
+                        $block = $line[$i] === self::PLAYER_POS ? self::BLOCK_EMPTY : self::BLOCK_GOAL;
                         break;
                     case self::BLOCK_EMPTY:
                     case self::BLOCK_GOAL:
                     case self::BLOCK_WALL:
                     case self::BLOCK_BOX:
-                    case self::BLOCK_BOX_OK:
+                    case self::BLOCK_BOX_ON_GOAL:
                         $block = $line[$i];
                         break;
                     default:
@@ -120,13 +122,13 @@ class Game
 
             // There is a box? Checking next block
             case self::BLOCK_BOX:
-            case self::BLOCK_BOX_OK:
+            case self::BLOCK_BOX_ON_GOAL:
                 switch ($nextNextBlock) {
                     // Box can be moved
                     case self::BLOCK_EMPTY:
                     case self::BLOCK_GOAL:
                         $nextBlock = $nextBlock === self::BLOCK_BOX ? self::BLOCK_EMPTY : self::BLOCK_GOAL;
-                        $nextNextBlock = $nextNextBlock === self::BLOCK_EMPTY ? self::BLOCK_BOX : self::BLOCK_BOX_OK;
+                        $nextNextBlock = $nextNextBlock === self::BLOCK_EMPTY ? self::BLOCK_BOX : self::BLOCK_BOX_ON_GOAL;
 
                         return true;
                 }

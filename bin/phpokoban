@@ -3,7 +3,7 @@
 
 require __DIR__.'/../vendor/autoload.php';
 
-$filepath = $argv[1] ?? __DIR__.'/../config/levels/lvl1.txt';
+$filepath = $argv[1] ?? __DIR__.'/../config/levels/lvl1.xsb';
 
 $txtLevel = file($filepath, FILE_IGNORE_NEW_LINES);
 if (false === $txtLevel) {
@@ -16,7 +16,7 @@ $renderer = new \Phpokoban\SdlRenderer('PhpOkoban!', 640, 640);
 $renderer
     ->addTextureFile(\Phpokoban\Game::PLAYER_POS, __DIR__.'/../config/textures/player.bmp')
     ->addTextureFile(\Phpokoban\Game::BLOCK_BOX, __DIR__.'/../config/textures/box.bmp')
-    ->addTextureFile(\Phpokoban\Game::BLOCK_BOX_OK, __DIR__.'/../config/textures/box_ok.bmp')
+    ->addTextureFile(\Phpokoban\Game::BLOCK_BOX_ON_GOAL, __DIR__.'/../config/textures/box_ok.bmp')
     ->addTextureFile(\Phpokoban\Game::BLOCK_WALL, __DIR__.'/../config/textures/wall.bmp')
     ->addTextureFile(\Phpokoban\Game::BLOCK_GOAL, __DIR__.'/../config/textures/goal.bmp');
 
