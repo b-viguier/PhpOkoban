@@ -1,6 +1,6 @@
 # PhpOkoban
 
-<img src="doc/screenshot.png?raw=true" width="250" align="right" alt="PhpOkoban screenshot">
+<img src="doc/phpokoban.gif?raw=true" width="250" align="right" alt="PhpOkoban screenshot">
 
 A [Sokoban](https://fr.wikipedia.org/wiki/Sokoban)-like game written in Php/SDL.
 
