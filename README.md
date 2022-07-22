@@ -7,8 +7,8 @@ A [Sokoban](https://fr.wikipedia.org/wiki/Sokoban)-like game written in Php/SDL.
 
 ## Requirements
 
-* Php 7.2
-* [phpsdl extension](https://github.com/Ponup/phpsdl)
+* Php 8.1
+* [phpsdl extension](https://github.com/Ponup/php-sdl)
 
 ## Install
 

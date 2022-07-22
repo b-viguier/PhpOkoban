@@ -75,7 +75,6 @@ class SdlRenderer
         while (!$quit) {
 
             // Inputs polling
-            $keyState = array_flip(\SDL_GetKeyboardState($numKeys, false));
             while (sdl_pollevent($event) !== 0) {
                 switch ($event->type) {
                     case SDL_QUIT:
